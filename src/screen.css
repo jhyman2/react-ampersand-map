@@ -1,0 +1,11 @@
+body {
+  height: 100vh;
+}
+.row {
+  height: 40%;
+}
+.full-width {
+  width:100% !important;
+  height:400px !important;
+  margin-bottom:10px;
+}
