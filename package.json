@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server",
+    "prebuild": "rm -rf public && mkdir public",
+    "build": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,7 @@
   },
   "homepage": "https://github.com/jhyman2/react-ampersand-map#readme",
   "dependencies": {
+    "ampersand": "^3.0.5",
     "ampersand-app": "^1.0.4",
     "ampersand-router": "^3.0.2",
     "autoprefixer-core": "^5.2.1",
@@ -28,6 +31,7 @@
     "hjs-webpack": "^2.12.1",
     "json-loader": "^0.5.2",
     "postcss-loader": "^0.5.1",
+    "react": "^0.13.3",
     "react-hot-loader": "^1.2.8",
     "style-loader": "^0.12.3",
     "stylus-loader": "^1.2.1",

@@ -2,18 +2,13 @@ import app from 'ampersand-app'
 import React from 'react'
 import Router from 'ampersand-router'
 import PublicPage from './pages/public'
-import ReposPage from './pages/repos'
 
 export default Router.extend({
   routes: {
-    '': 'public',
-    'repos': 'repos'
+    '': 'public'
   },
 
   public () {
     React.render(<PublicPage/>, document.body)
-  },
-  repos () {
-    React.render(<ReposPage/>, document.body)
   }
 })
