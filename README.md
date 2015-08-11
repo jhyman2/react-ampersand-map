@@ -1,7 +1,7 @@
 Description
 -----------
 
-    An ampersand-react app to show map incidents and videos on a map
+    - An ampersand-react app to show map incidents and videos on a map
 
 Installation
 -----------
@@ -11,5 +11,5 @@ Installation
 To run
 -----------
 
-    - node app.js
+    - npm start
     - http://localhost:3000
