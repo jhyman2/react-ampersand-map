@@ -1,6 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
-import ReactGoogleMaps from 'react-google-maps'
+import GoogleMap from 'react-google-maps'
 
 export default React.createClass({
   displayName: 'PublicPage',
