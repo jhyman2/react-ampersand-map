@@ -1,6 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
-import GoogleMap from 'react-google-maps'
+import leaflet from 'leaflet'
 
 export default React.createClass({
   displayName: 'PublicPage',
@@ -11,6 +11,20 @@ export default React.createClass({
   },
 
   componentDidMount () {
+
+    var map = this.map = L.map(this.getDOMNode(), {
+      minZoom: 2,
+      maxZoom: 20,
+      layers: [
+        L.tileLayer(
+          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          {attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'})
+      ],
+      attributionControl: false,
+    });
+
+    map.on('click', this.onMapClick);
+    map.fitWorld();
     $.getJSON(this.props.source, (res) => {
       if (this.isMounted()) {
         this.setState({
@@ -22,9 +36,6 @@ export default React.createClass({
 
   render () {
     var incidents = (this.state.incidents)
-    var GoogleMapsAPI = window.google.maps
-    var Map = ReactGoogleMaps.Map
-    var OverlayView = ReactGoogleMaps.OverlayView
     return (
       <div className='container'>
         <header role='banner center'>
@@ -36,16 +47,8 @@ export default React.createClass({
             {incidents.map(inc => <li>{inc.title} <p>lat: {inc.loc.coordinates[0]} long: {inc.loc.coordinates[1]}</p></li>)}
           </ul>
         </div>
-        <div>
+        <div className="map">
           <p>Google Map</p>
-          <GoogleMap containerProps={{
-            ...this.props,
-            style: {
-              height: "100%",
-            },
-          }}
-          defaultZoom={10}
-          defaultCenter={{lat: -34.397, lng: 150.644}} />
         </div>
       </div>
     )
