@@ -1,6 +1,8 @@
 import React from 'react'
 import $ from 'jquery'
 import leaflet from 'leaflet'
+import IncidentComponent from './incident'
+import MapComponent from './map'
 
 export default React.createClass({
   displayName: 'PublicPage',
@@ -8,34 +10,6 @@ export default React.createClass({
     return {
       incidents: []
     };
-  },
-
-  componentDidMount () {
-
-    var map = this.map = leaflet.map(this.getDOMNode(), {
-      minZoom: 2,
-      maxZoom: 20,
-      center: [39.2833, -76.6167],
-      layers: [
-        leaflet.tileLayer(
-          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          {
-            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-          }
-        )
-      ],
-      attributionControl: false,
-    });
-
-    map.on('click', this.onMapClick);
-    map.fitWorld();
-    $.getJSON(this.props.source, (res) => {
-      if (this.isMounted()) {
-        this.setState({
-          incidents: res
-        });
-      }
-    }.bind(this));
   },
 
   render () {
@@ -47,9 +21,8 @@ export default React.createClass({
         </header>
         <div>
           <p>React app displaying a google map with incidents and corresponding videos</p>
-          <ul>
-            {incidents.map(inc => <li>{inc.title} <p>lat: {inc.loc.coordinates[0]} long: {inc.loc.coordinates[1]}</p></li>)}
-          </ul>
+          {<IncidentComponent />}
+          {<MapComponent />}
         </div>
         <div id="map">
         </div>
